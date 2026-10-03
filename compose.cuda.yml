@@ -1,0 +1,13 @@
+# Overrides CUDA para o compose base — ativado via `make nvidia-cuda-dev`.
+services:
+  laya-server:
+    environment:
+      LAYA_DEVICE: cuda
+      LAYA_INT8: "0" # int8 dinâmico do torch é CPU-only
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
