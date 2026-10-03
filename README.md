@@ -66,4 +66,4 @@ uv run scripts/bench_latency.py -n 100 -c 2    # simula os dois agentes
 ## Controles
 
 `W`/`↑` e `S`/`↓` movem a raquete · `Espaço` pausa · `R` reseta placar ·
-`M`/`Tab` alterna Humano-vs-IA ↔ IA-vs-IA · `Q`/`Esc` sai.
+  `M`/`Tab` alterna Humano-vs-IA ↔ IA-vs-IA · `Q`/`Esc` sai.
