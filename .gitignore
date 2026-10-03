@@ -1,0 +1,7 @@
+/target
+/pong_laya_telemetry.csv
+laya-server/.venv/
+laya-server/__pycache__/
+laya-server/.python-version
+**/__pycache__/
+*.pyc
