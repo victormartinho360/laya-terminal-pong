@@ -23,6 +23,26 @@ localmente via HTTP (`POST /v1/systemone`).
 - **Telemetria** — o jogo grava `pong_laya_telemetry.csv` (latência, ação,
   confiança, modelo) e mostra p50/p95/p99 ao vivo no painel lateral.
 
+## Makefile
+
+Os comandos do dia a dia estão encapsulados num `Makefile` (rode `make help`):
+
+| Alvo | O que faz |
+|---|---|
+| `make build` | Compila o jogo em release |
+| `make run` | Compila e roda o jogo (servidor precisa estar no ar) |
+| `make up` | Sobe o servidor via Docker em **CPU** (network host, zero overhead) |
+| `make nvidia-cuda-dev` | Sobe o servidor via Docker em **CUDA** (compose base + `compose.cuda.yml`; requer [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html)) |
+| `make server` | Sobe o servidor **nativo** (sem Docker, via `uv`) em CPU |
+| `make server-gpu` | Mesmo, com `LAYA_DEVICE=cuda` |
+| `make bench N=100 C=2` | Benchmark de latência do servidor (`N` requisições, `C` em paralelo) |
+| `make logs` | Segue os logs do servidor no compose |
+| `make down` / `make clean` | Derruba o compose / limpa artefatos do Rust |
+
+O modo CUDA usa o override [`compose.cuda.yml`](compose.cuda.yml), que liga
+`LAYA_DEVICE=cuda`, desliga a quantização int8 (ela é CPU-only) e reserva a
+GPU via `deploy.resources` — o compose base continua CPU-only e válido sozinho.
+
 ## Rodando com Docker (servidor) + jogo nativo
 
 ```bash
